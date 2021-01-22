@@ -5,52 +5,52 @@ import (
 	"strings"
 )
 
-type FindWordsResult struct {
-	Words []*FindWordResult
+type FindItemsResult struct {
+	Items []*FindItemResult
 }
 
-func NewFindWordsResult(words []string, ret string) *FindWordsResult {
+func NewFindItemsResult(words []string, ret string) *FindItemsResult {
 	rets := strings.Split(ret, "|")
 
-	f := &FindWordsResult{}
+	f := &FindItemsResult{}
 	for _, item := range rets {
 		item = strings.Replace(item, ",", "|", -1)
-		f.Words = append(f.Words, NewFindWordResult(words, item))
+		f.Items = append(f.Items, NewFindItemResult(words, item))
 	}
 	return f
 }
 
-func (f *FindWordsResult) IsOK() bool {
+func (f *FindItemsResult) IsOK() bool {
 	return f.Count() > 0
 }
 
-func (f *FindWordsResult) Count() int {
-	return len(f.Words)
+func (f *FindItemsResult) Count() int {
+	return len(f.Items)
 }
 
-type FindWordResult struct {
+type FindItemResult struct {
 	Index int
-	Word  string
+	Item  string
 	Point Point
 }
 
-func NewFindWordResult(words []string, ret string) *FindWordResult {
+func NewFindItemResult(words []string, ret string) *FindItemResult {
 	rets := strings.Split(ret, "|")
 
-	f := &FindWordResult{}
+	f := &FindItemResult{}
 	f.Index, _ = strconv.Atoi(rets[0])
 	if f.Index == -1 {
 		return f
 	}
 
-	f.Word = words[f.Index]
+	f.Item = words[f.Index]
 	f.Point.X, _ = strconv.Atoi(rets[1])
 	f.Point.Y, _ = strconv.Atoi(rets[2])
 
 	return f
 }
 
-func (f *FindWordResult) IsOK() bool {
+func (f *FindItemResult) IsOK() bool {
 	return IsFindStrOK(int64(f.Index))
 }
 

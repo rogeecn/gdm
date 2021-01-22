@@ -43,20 +43,20 @@ func (com *DmSoft) FindStr(r utils.Rect, str []string, colors *utils.Colors, sim
 	x.Clear()
 	y.Clear()
 
-	return pt, utils.IsOK(ret.Val)
+	return pt, utils.IsFindStrOK(ret.Val)
 }
 
-func (com *DmSoft) FindStrE(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindWordResult {
+func (com *DmSoft) FindStrE(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrE", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim)
-	return utils.NewFindWordResult(str, ret.ToString())
+	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrEx(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindWordsResult {
+func (com *DmSoft) FindStrEx(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrEx", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim)
-	return utils.NewFindWordsResult(str, ret.ToString())
+	return utils.NewFindItemsResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrFast(r utils.Rect, str []string, colors *utils.Colors, sim float32, intX *int, intY *int) *utils.FindWordResult {
+func (com *DmSoft) FindStrFast(r utils.Rect, str []string, colors *utils.Colors, sim float32, intX *int, intY *int) *utils.FindItemResult {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindStrFast", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim, &x, &y)
@@ -67,20 +67,20 @@ func (com *DmSoft) FindStrFast(r utils.Rect, str []string, colors *utils.Colors,
 	x.Clear()
 	y.Clear()
 
-	return utils.NewFindWordResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
+	return utils.NewFindItemResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
 }
 
-func (com *DmSoft) FindStrFastE(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindWordResult {
+func (com *DmSoft) FindStrFastE(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrFastE", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim)
-	return utils.NewFindWordResult(str, ret.ToString())
+	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrFastEx(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindWordsResult {
+func (com *DmSoft) FindStrFastEx(r utils.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrFastEx", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim)
-	return utils.NewFindWordsResult(str, ret.ToString())
+	return utils.NewFindItemsResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrWithFont(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindWordResult {
+func (com *DmSoft) FindStrWithFont(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindStrWithFont", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag, &x, &y)
@@ -91,17 +91,17 @@ func (com *DmSoft) FindStrWithFont(r utils.Rect, str []string, colors *utils.Col
 	x.Clear()
 	y.Clear()
 
-	return utils.NewFindWordResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
+	return utils.NewFindItemResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
 }
 
-func (com *DmSoft) FindStrWithFontE(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindWordResult {
+func (com *DmSoft) FindStrWithFontE(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrWithFontE", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag)
-	return utils.NewFindWordResult(str, ret.ToString())
+	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrWithFontEx(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindWordsResult {
+func (com *DmSoft) FindStrWithFontEx(r utils.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrWithFontEx", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag)
-	return utils.NewFindWordsResult(str, ret.ToString())
+	return utils.NewFindItemsResult(str, ret.ToString())
 }
 
 func (com *DmSoft) GetDict(index, fontIndex int) string {
