@@ -1,6 +1,20 @@
 package gdm
 
 const (
-	WINDOW_STATE_CLOSE  = 0 // 关闭指定窗口
-	WINDOW_STATE_ACTIVE = 1 // 激活指定窗口
+	WINDOW_STATE_CLOSE              = 0
+	WINDOW_STATE_ACTIVE             = 1
+	WINDOW_STATE_MINIMIZE_          = 2
+	WINDOW_STATE_MINIMIZE_FREE_MEM  = 3
+	WINDOW_STATE_MAXMIZE            = 4
+	WINDOW_STATE_RESTORE            = 5
+	WINDOW_STATE_HIDE               = 6
+	WINDOW_STATE_SHOW               = 7
+	WINDOW_STATE_TOP                = 8
+	WINDOW_STATE_CANCEL_TOP         = 9
+	WINDOW_STATE_DISABLE            = 10
+	WINDOW_STATE_CANCEL_DISABLE     = 11
+	WINDOW_STATE_RESTORE_AND_ACTIVE = 12
+	WINDOW_STATE_KILL               = 13
+	WINDOW_STATE_BLINK              = 14
+	WINDOW_STATE_FOCUS              = 15
 )

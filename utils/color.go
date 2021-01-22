@@ -31,8 +31,10 @@ type Colors struct {
 func NewColors() *Colors {
 	return &Colors{}
 }
-func (c *Colors) Add(col *Color) *Colors {
-	c.colors = append(c.colors, col)
+func (c *Colors) Add(col ...*Color) *Colors {
+	for _, color := range col {
+		c.colors = append(c.colors, color)
+	}
 	return c
 }
 

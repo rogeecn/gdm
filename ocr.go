@@ -31,10 +31,10 @@ func (com *DmSoft) FetchWord(r utils.Rect, color *utils.Colors, word string) str
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindStr(r utils.Rect, str string, colors *utils.Colors, sim float32) (utils.Point, bool) {
+func (com *DmSoft) FindStr(r utils.Rect, str []string, colors *utils.Colors, sim float32) (utils.Point, bool) {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
-	ret, _ := com.dm.CallMethod("FindStr", r.Left, r.Top, r.Right, r.Bottom, str, colors.String(), sim, &x, &y)
+	ret, _ := com.dm.CallMethod("FindStr", r.Left, r.Top, r.Right, r.Bottom, strings.Join(str, "|"), colors.String(), sim, &x, &y)
 
 	var pt utils.Point
 	pt.X = int(x.Val)
