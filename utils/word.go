@@ -42,6 +42,10 @@ func NewFindItemResult(words []string, ret string) *FindItemResult {
 	if f.Index == -1 {
 		return f
 	}
+	if f.Index > len(words) {
+		f.Index = -1
+		return f
+	}
 
 	f.Item = words[f.Index]
 	f.Point.X, _ = strconv.Atoi(rets[1])
