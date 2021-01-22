@@ -154,6 +154,11 @@ func (com *DmSoft) SetColGapNoDict(colGap int) bool {
 	return utils.IsOK(ret.Val)
 }
 
+func (com *DmSoft) SetDefaultDict(dict string) {
+	com.SetDict(0, dict)
+	com.UseDict(0)
+}
+
 func (com *DmSoft) SetDict(index int, file string) bool {
 	ret, _ := com.dm.CallMethod("SetDict", index, file)
 	return utils.IsOK(ret.Val)
