@@ -131,7 +131,7 @@ func (com *DmSoft) FindMultiColorEx(r utils.Rect, firstColor string, offsetColor
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindPic(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindWordResult {
+func (com *DmSoft) FindPic(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindItemResult {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindPic", r.Left, r.Top, r.Right, r.Bottom, strings.Join(pics, "|"), deltaColor, sim, dir, &x, &y)
@@ -142,17 +142,17 @@ func (com *DmSoft) FindPic(r utils.Rect, pics []string, deltaColor string, sim f
 	x.Clear()
 	y.Clear()
 
-	return utils.NewFindWordResult(pics, fmt.Sprintf("%d|%d|%d", ret.Val, ptX, ptY))
+	return utils.NewFindItemResult(pics, fmt.Sprintf("%d|%d|%d", ret.Val, ptX, ptY))
 }
 
-func (com *DmSoft) FindPicE(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindWordResult {
+func (com *DmSoft) FindPicE(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindPicE", r.Left, r.Top, r.Right, r.Bottom, strings.Join(pics, "|"), deltaColor, sim, dir)
-	return utils.NewFindWordResult(pics, ret.ToString())
+	return utils.NewFindItemResult(pics, ret.ToString())
 }
 
-func (com *DmSoft) FindPicEx(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindWordsResult {
+func (com *DmSoft) FindPicEx(r utils.Rect, pics []string, deltaColor string, sim float32, dir int) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindPicEx", r.Left, r.Top, r.Right, r.Bottom, strings.Join(pics, "|"), deltaColor, sim, dir)
-	return utils.NewFindWordsResult(pics, ret.ToString())
+	return utils.NewFindItemsResult(pics, ret.ToString())
 }
 
 // func (com *DmSoft)FindPicMem(r.Left, r.Top, r.Right, r.Bottom, pic_info, delta_color,sim, dir,intX, intY)  int{}
@@ -203,9 +203,12 @@ func (com *DmSoft) IsDisplayDead(r utils.Rect, time int) bool {
 	return utils.IsOK(ret.Val)
 }
 
-// func (com *DmSoft)LoadPic(pic_name) int{}
+func (com *DmSoft) LoadPic(str []string) bool {
+	ret, _ := com.dm.CallMethod("LoadPic", strings.Join(str, "|"))
+	return utils.IsOK(ret.Val)
+}
+
 // func (com *DmSoft)LoadPicByte(addr,size,pic_name) int{}
-// func (com *DmSoft)LoadPic(pic_name) int{}
 
 func (com *DmSoft) MatchPicName(picName string) string {
 	ret, _ := com.dm.CallMethod("MatchPicName", picName)
