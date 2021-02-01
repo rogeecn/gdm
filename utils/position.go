@@ -4,12 +4,20 @@ type Point struct {
 	X, Y int
 }
 
+func (p Point) Equal(pt Point) bool {
+	return pt.X == p.X && pt.Y == p.Y
+}
+
 type Size struct {
 	Width, Height int
 }
 
 type Rect struct {
 	Left, Top, Right, Bottom int
+}
+
+func (r Rect) CenterPoint() Point {
+	return Point{r.Size().Width / 2, r.Size().Height / 2}
 }
 
 func (r Rect) Size() Size {
