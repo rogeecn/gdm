@@ -1,7 +1,15 @@
 package utils
 
+import "math"
+
 type Point struct {
 	X, Y int
+}
+
+func (p Point) Near(pt Point, offset int) bool {
+	xNear := int(math.Abs(float64(pt.X-p.X))) < offset
+	yNear := int(math.Abs(float64(pt.Y-p.Y))) < offset
+	return xNear && yNear
 }
 
 func (p Point) Equal(pt Point) bool {
@@ -18,6 +26,17 @@ type Rect struct {
 
 func (r Rect) CenterPoint() Point {
 	return Point{r.Size().Width / 2, r.Size().Height / 2}
+}
+
+func (r Rect) CenterRegion() Rect {
+	size := r.Size()
+
+	return Rect{
+		size.Width / 3,
+		size.Height / 3,
+		2 * (size.Width / 3),
+		2 * (size.Height / 3),
+	}
 }
 
 func (r Rect) Size() Size {
