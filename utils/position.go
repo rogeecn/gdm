@@ -4,6 +4,10 @@ type Point struct {
 	X, Y int
 }
 
+func (p Point) Equal(pt Point) bool {
+	return pt.X == p.X && p.Y == pt.Y
+}
+
 type Size struct {
 	Width, Height int
 }
