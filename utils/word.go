@@ -10,9 +10,12 @@ type FindItemsResult struct {
 }
 
 func NewFindItemsResult(words []string, ret string) *FindItemsResult {
-	rets := strings.Split(ret, "|")
-
 	f := &FindItemsResult{}
+	if len(ret) == 0 {
+		return f
+	}
+
+	rets := strings.Split(ret, "|")
 	for _, item := range rets {
 		item = strings.Replace(item, ",", "|", -1)
 		f.Items = append(f.Items, NewFindItemResult(words, item))
@@ -35,11 +38,18 @@ type FindItemResult struct {
 }
 
 func NewFindItemResult(words []string, ret string) *FindItemResult {
-	rets := strings.Split(ret, "|")
-
 	f := &FindItemResult{}
+	if len(ret) == 0 {
+		return f
+	}
+
+	rets := strings.Split(ret, "|")
 	f.Index, _ = strconv.Atoi(rets[0])
 	if f.Index == -1 {
+		return f
+	}
+	if f.Index > len(words) {
+		f.Index = -1
 		return f
 	}
 
