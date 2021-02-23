@@ -23,6 +23,13 @@ func (r Rect) Size() Size {
 	}
 }
 
+func (r Rect) PointIn(pt Point) bool {
+	if pt.X >= r.Left && pt.X <= r.Right && pt.Y >= r.Top && pt.Y <= r.Bottom {
+		return true
+	}
+	return false
+}
+
 func (r Rect) CenterPoint() Point {
 	return Point{r.Left + r.Size().Width/2, r.Top + r.Size().Height/2}
 }
