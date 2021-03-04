@@ -1,6 +1,35 @@
 package gdm
 
 // 内存操作暂时不需要
+const (
+	INT8  = 8
+	INT16 = 16
+	INT32 = 32
+)
+
+const (
+	STR_GBK     = 0
+	STR_UNICODE = 1
+)
+
+func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int {
+	ret, _ := com.dm.CallMethod("ReadInt", hwnd, addr, intType)
+	return int(ret.Val)
+}
+
+func (com *DmSoft) ReadString(hwnd int, addr string, strType int) int {
+	ret, _ := com.dm.CallMethod("ReadInt", hwnd, addr, strType)
+	return int(ret.Val)
+}
+
+func (com *DmSoft) ReadDouble(hwnd int, addr string) int {
+	ret, _ := com.dm.CallMethod("ReadDouble", hwnd, addr)
+	return int(ret.Val)
+}
+func (com *DmSoft) ReadFloat(hwnd int, addr string) int {
+	ret, _ := com.dm.CallMethod("ReadFloat", hwnd, addr)
+	return int(ret.Val)
+}
 
 // string DoubleToData(value)
 // string FindData(hwnd, addr_range, data)
