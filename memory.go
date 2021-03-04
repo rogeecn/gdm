@@ -1,10 +1,12 @@
 package gdm
 
+import "log"
+
 // 内存操作暂时不需要
 const (
-	INT8  = 8
-	INT16 = 16
-	INT32 = 32
+	INT32 = 0
+	INT16 = 1
+	INT8  = 2
 )
 
 const (
@@ -12,9 +14,10 @@ const (
 	STR_UNICODE = 1
 )
 
-func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int {
+func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int64 {
+	log.Println(hwnd, addr, intType)
 	ret, _ := com.dm.CallMethod("ReadInt", hwnd, addr, intType)
-	return int(ret.Val)
+	return ret.Val
 }
 
 func (com *DmSoft) ReadString(hwnd int, addr string, strType int) string {
