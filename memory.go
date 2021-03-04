@@ -18,7 +18,7 @@ func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int {
 }
 
 func (com *DmSoft) ReadString(hwnd int, addr string, strType int) int {
-	ret, _ := com.dm.CallMethod("ReadInt", hwnd, addr, strType)
+	ret, _ := com.dm.CallMethod("ReadString", hwnd, addr, strType)
 	return int(ret.Val)
 }
 
