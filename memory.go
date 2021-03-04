@@ -22,10 +22,11 @@ func (com *DmSoft) ReadString(hwnd int, addr string, strType int) string {
 	return string(ret.Val)
 }
 
-func (com *DmSoft) ReadDouble(hwnd int, addr string) float32 {
+func (com *DmSoft) ReadDouble(hwnd int, addr string) float64 {
 	ret, _ := com.dm.CallMethod("ReadDouble", hwnd, addr)
-	return float32(ret.Val)
+	return float64(ret.Val)
 }
+
 func (com *DmSoft) ReadFloat(hwnd int, addr string) float32 {
 	ret, _ := com.dm.CallMethod("ReadFloat", hwnd, addr)
 	return float32(ret.Val)
