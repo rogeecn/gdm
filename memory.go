@@ -17,18 +17,18 @@ func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) ReadString(hwnd int, addr string, strType int) int {
+func (com *DmSoft) ReadString(hwnd int, addr string, strType int) string {
 	ret, _ := com.dm.CallMethod("ReadString", hwnd, addr, strType)
-	return int(ret.Val)
+	return string(ret.Val)
 }
 
-func (com *DmSoft) ReadDouble(hwnd int, addr string) int {
+func (com *DmSoft) ReadDouble(hwnd int, addr string) float32 {
 	ret, _ := com.dm.CallMethod("ReadDouble", hwnd, addr)
-	return int(ret.Val)
+	return float32(ret.Val)
 }
-func (com *DmSoft) ReadFloat(hwnd int, addr string) int {
+func (com *DmSoft) ReadFloat(hwnd int, addr string) float32 {
 	ret, _ := com.dm.CallMethod("ReadFloat", hwnd, addr)
-	return int(ret.Val)
+	return float32(ret.Val)
 }
 
 // string DoubleToData(value)
