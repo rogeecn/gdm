@@ -18,3 +18,7 @@ https://github.com/qianniancn/go-dmsoft
 
 ## License
 [Apache 2.0 License](https://github.com/rogeecn/gdm/blob/main/LICENSE)
+
+## Contact me
+
+rogeecn@qq.com
