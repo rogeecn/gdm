@@ -3,6 +3,7 @@ package gdm
 import (
 	"errors"
 	ole "github.com/go-ole/go-ole"
+	"github.com/rogeecn/draw"
 	"github.com/rogeecn/gdm/utils"
 )
 
@@ -18,7 +19,7 @@ func (com *DmSoft) EnableMouseAccuracy(enable int) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) GetCursorPos() (utils.Point, bool) {
+func (com *DmSoft) GetCursorPos() (*draw.Point, bool) {
 	intx := ole.NewVariant(ole.VT_I4, 0)
 	inty := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("GetCursorPos", &intx, &inty)
@@ -27,7 +28,7 @@ func (com *DmSoft) GetCursorPos() (utils.Point, bool) {
 	intx.Clear()
 	inty.Clear()
 
-	return utils.Point{ptX, ptY}, utils.IsOK(ret.Val)
+	return draw.NewPoint(ptX, ptY), utils.IsOK(ret.Val)
 }
 
 func (com *DmSoft) GetCursorShape() string {
@@ -40,11 +41,11 @@ func (com *DmSoft) GetCursorShapeEx(types int) string {
 	return ret.ToString()
 }
 
-func (com *DmSoft) GetCursorSpot() (utils.Point, bool) {
+func (com *DmSoft) GetCursorSpot() (*draw.Point, bool) {
 	ret, _ := com.dm.CallMethod("GetCursorSpot")
 
 	if len(ret.ToString()) == 0 {
-		return utils.Point{}, false
+		return *draw.Point{}, false
 	}
 
 	return utils.ToPoint(ret.ToString()), true
@@ -98,12 +99,12 @@ func (com *DmSoft) MoveR(rx, ry int) bool {
 	return utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) MoveTo(pt utils.Point) bool {
+func (com *DmSoft) MoveTo(pt *draw.Point) bool {
 	ret, _ := com.dm.CallMethod("MoveTo", pt.X, pt.Y)
 	return utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) MoveToEx(pt utils.Point, s utils.Size) utils.Point {
+func (com *DmSoft) MoveToEx(pt *draw.Point, s *draw.Size) *draw.Point {
 	ret, _ := com.dm.CallMethod("MoveToEx", pt.X, pt.Y, s.Width, s.Height)
 	return utils.ToPoint(ret.ToString())
 }

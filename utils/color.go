@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"github.com/rogeecn/draw"
 	"strings"
 )
 
@@ -49,15 +50,12 @@ func (c *Colors) String() string {
 
 type ColorPosition struct {
 	color string
-	Point Point
+	Point *draw.Point
 }
 
 func NewColorPosition(color string, ptX, ptY int) *ColorPosition {
 	return &ColorPosition{
 		color: color,
-		Point: Point{
-			X: ptX,
-			Y: ptY,
-		},
+		Point: draw.NewPoint(ptX, ptY),
 	}
 }

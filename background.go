@@ -1,6 +1,7 @@
 package gdm
 
 import (
+	"github.com/rogeecn/draw"
 	"github.com/rogeecn/gdm/utils"
 )
 
@@ -142,8 +143,8 @@ func (com *DmSoft) LockInput(lock int) bool {
 	return utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) LockMouseRect(r utils.Rect) bool {
-	ret, _ := com.dm.CallMethod("LockMouseRect", r.Left, r.Top, r.Right, r.Bottom)
+func (com *DmSoft) LockMouseRect(r *draw.Rect) bool {
+	ret, _ := com.dm.CallMethod("LockMouseRect", r.Left(), r.Top(), r.Right(), r.Bottom())
 	return utils.IsOK(ret.Val)
 }
 

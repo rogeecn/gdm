@@ -2,10 +2,11 @@ package gdm
 
 import (
 	ole "github.com/go-ole/go-ole"
+	"github.com/rogeecn/draw"
 	"github.com/rogeecn/gdm/utils"
 )
 
-func (com *DmSoft) ClientToScreen(hwnd int, pt utils.Point) (utils.Point, bool) {
+func (com *DmSoft) ClientToScreen(hwnd int, pt *draw.Point) (*draw.Point, bool) {
 	intx := ole.NewVariant(ole.VT_I4, int64(pt.X))
 	inty := ole.NewVariant(ole.VT_I4, int64(pt.Y))
 	ret, _ := com.dm.CallMethod("ClientToScreen", hwnd, &intx, &inty)
@@ -15,7 +16,7 @@ func (com *DmSoft) ClientToScreen(hwnd int, pt utils.Point) (utils.Point, bool) 
 	intx.Clear()
 	inty.Clear()
 
-	return utils.Point{ptX, ptY}, utils.IsOK(ret.Val)
+	return draw.NewPoint(ptX, ptY), utils.IsOK(ret.Val)
 }
 
 func (com *DmSoft) EnumProcess(name string) string {
@@ -68,15 +69,14 @@ func (com *DmSoft) FindWindowSuper(spec1 string, flag1, type1 int, spec2 string,
 	return int(ret.Val)
 }
 
-func (com *DmSoft) GetClientRect(hwnd int) utils.Rect {
+func (com *DmSoft) GetClientRect(hwnd int) *draw.Rect {
 	intx1 := ole.NewVariant(ole.VT_I4, 0)
 	inty1 := ole.NewVariant(ole.VT_I4, 0)
 	intx2 := ole.NewVariant(ole.VT_I4, 0)
 	inty2 := ole.NewVariant(ole.VT_I4, 0)
 	com.dm.CallMethod("GetClientRect", hwnd, &intx1, &inty1, &intx2, &inty2)
 
-	var r utils.Rect
-	r.Left, r.Top, r.Right, r.Bottom = int(intx1.Val), int(inty1.Val), int(intx2.Val), int(inty2.Val)
+	x, y, x1, y1 := int(intx1.Val), int(inty1.Val), int(intx2.Val), int(inty2.Val)
 
 	// 清除对象变量内存
 	intx1.Clear()
@@ -84,7 +84,10 @@ func (com *DmSoft) GetClientRect(hwnd int) utils.Rect {
 	intx2.Clear()
 	inty2.Clear()
 
-	return r
+	return draw.NewRectFromPoint(
+		draw.NewPoint(x, y),
+		draw.NewPoint(x1, y1),
+	)
 }
 
 func (com *DmSoft) GetForegroundFocus() int {
@@ -137,15 +140,14 @@ func (com *DmSoft) GetWindowProcessPath(hwnd int) string {
 	return ret.ToString()
 }
 
-func (com *DmSoft) GetWindowRect(hwnd int) utils.Rect {
+func (com *DmSoft) GetWindowRect(hwnd int) *draw.Rect {
 	intx1 := ole.NewVariant(ole.VT_I4, 0)
 	inty1 := ole.NewVariant(ole.VT_I4, 0)
 	intx2 := ole.NewVariant(ole.VT_I4, 0)
 	inty2 := ole.NewVariant(ole.VT_I4, 0)
 	com.dm.CallMethod("GetWindowRect", hwnd, &intx1, &inty1, &intx2, &inty2)
 
-	var r utils.Rect
-	r.Left, r.Top, r.Right, r.Bottom = int(intx1.Val), int(inty1.Val), int(intx2.Val), int(inty2.Val)
+	x, y, x1, y1 := int(intx1.Val), int(inty1.Val), int(intx2.Val), int(inty2.Val)
 
 	// 清除对象变量内存
 	intx1.Clear()
@@ -153,7 +155,10 @@ func (com *DmSoft) GetWindowRect(hwnd int) utils.Rect {
 	intx2.Clear()
 	inty2.Clear()
 
-	return r
+	return draw.NewRectFromPoint(
+		draw.NewPoint(x, y),
+		draw.NewPoint(x1, y1),
+	)
 }
 
 func (com *DmSoft) GetWindowState(hwnd, flag int) int {
@@ -171,12 +176,12 @@ func (com *DmSoft) MoveWindow(hwnd, x, y int) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) ScreenToClient(hwnd int, pt utils.Point) utils.Point {
+func (com *DmSoft) ScreenToClient(hwnd int, pt *draw.Point) *draw.Point {
 	intx := ole.NewVariant(ole.VT_I4, int64(pt.X))
 	inty := ole.NewVariant(ole.VT_I4, int64(pt.Y))
 	com.dm.CallMethod("ScreenToClient", hwnd, &intx, &inty)
 
-	var p utils.Point
+	var p *draw.Point
 	p.X, p.Y = int(intx.Val), int(inty.Val)
 	intx.Clear()
 	inty.Clear()
@@ -214,7 +219,7 @@ func (com *DmSoft) SetClientSize(hwnd, width, height int) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) SetWindowSize(hwnd, s utils.Size) bool {
+func (com *DmSoft) SetWindowSize(hwnd, s *draw.Size) bool {
 	ret, _ := com.dm.CallMethod("SetWindowSize", hwnd, s.Width, s.Height)
 	return utils.IsOK(ret.Val)
 }

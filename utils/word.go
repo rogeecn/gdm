@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"fmt"
+	"github.com/rogeecn/draw"
 	"strconv"
 	"strings"
 )
@@ -34,7 +36,7 @@ func (f *FindItemsResult) Count() int {
 type FindItemResult struct {
 	Index int
 	Item  string
-	Point Point
+	Point *draw.Point
 }
 
 func NewFindItemResult(words []string, ret string) *FindItemResult {
@@ -66,7 +68,7 @@ func (f *FindItemResult) IsOK() bool {
 
 type OcrResult struct {
 	Char  string
-	Point Point
+	Point *draw.Point
 }
 
 func NewOcrResult(ret string) *OcrResult {
@@ -74,8 +76,8 @@ func NewOcrResult(ret string) *OcrResult {
 
 	f := &OcrResult{}
 	f.Char = rets[0]
-	f.Point.X, _ = strconv.Atoi(rets[1])
-	f.Point.Y, _ = strconv.Atoi(rets[2])
+
+	f.Point, _ = draw.NewPointFromString(fmt.Sprintf("%s,%s", rets[1], rets[2]))
 
 	return f
 }
