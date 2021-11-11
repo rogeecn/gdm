@@ -1,6 +1,6 @@
 package utils
 
-import "errors"
+import "github.com/pkg/errors"
 
 var ErrorMap = map[int]error{
 	0:   nil,

@@ -32,6 +32,11 @@ type Colors struct {
 func NewColors() *Colors {
 	return &Colors{}
 }
+
+func ParseColors(color string) *Colors {
+	return NewColors()
+}
+
 func (c *Colors) Add(col ...*Color) *Colors {
 	for _, color := range col {
 		c.colors = append(c.colors, color)

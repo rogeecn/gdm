@@ -45,10 +45,14 @@ func (com *DmSoft) GetCursorSpot() (*draw.Point, bool) {
 	ret, _ := com.dm.CallMethod("GetCursorSpot")
 
 	if len(ret.ToString()) == 0 {
-		return *draw.Point{}, false
+		return EmptyPoint, false
 	}
 
-	return utils.ToPoint(ret.ToString()), true
+	pt, err := draw.NewPointFromString(ret.ToString())
+	if err != nil {
+		return EmptyPoint, false
+	}
+	return pt, true
 }
 
 func (com *DmSoft) GetMouseSpeed() int {
@@ -106,7 +110,11 @@ func (com *DmSoft) MoveTo(pt *draw.Point) bool {
 
 func (com *DmSoft) MoveToEx(pt *draw.Point, s *draw.Size) *draw.Point {
 	ret, _ := com.dm.CallMethod("MoveToEx", pt.X, pt.Y, s.Width, s.Height)
-	return utils.ToPoint(ret.ToString())
+	pt, err := draw.NewPointFromString(ret.ToString())
+	if err != nil {
+		return EmptyPoint
+	}
+	return pt
 }
 
 func (com *DmSoft) RightClick() bool {
