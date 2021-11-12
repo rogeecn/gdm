@@ -27,12 +27,12 @@ func (com *DmSoft) EnableShareDict(enable int) bool {
 	return utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) FetchWord(r *draw.Rect, color *utils.Colors, word string) string {
+func (com *DmSoft) FetchWord(r *draw.Rect, color *color.Colors, word string) string {
 	ret, _ := com.dm.CallMethod("FetchWord", r.Left(), r.Top(), r.Right(), r.Bottom(), color.String(), word)
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindStr(r *draw.Rect, str []string, colors *utils.Colors, sim float32) (*draw.Point, bool) {
+func (com *DmSoft) FindStr(r *draw.Rect, str []string, colors *color.Colors, sim float32) (*draw.Point, bool) {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindStr", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim, &x, &y)
@@ -47,17 +47,17 @@ func (com *DmSoft) FindStr(r *draw.Rect, str []string, colors *utils.Colors, sim
 	return pt, utils.IsFindStrOK(ret.Val)
 }
 
-func (com *DmSoft) FindStrE(r *draw.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemResult {
+func (com *DmSoft) FindStrE(r *draw.Rect, str []string, colors *color.Colors, sim float32) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrE", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim)
 	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrEx(r *draw.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemsResult {
+func (com *DmSoft) FindStrEx(r *draw.Rect, str []string, colors *color.Colors, sim float32) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrEx", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim)
 	return utils.NewFindItemsResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrFast(r *draw.Rect, str []string, colors *utils.Colors, sim float32, intX *int, intY *int) *utils.FindItemResult {
+func (com *DmSoft) FindStrFast(r *draw.Rect, str []string, colors *color.Colors, sim float32, intX *int, intY *int) *utils.FindItemResult {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindStrFast", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim, &x, &y)
@@ -71,17 +71,17 @@ func (com *DmSoft) FindStrFast(r *draw.Rect, str []string, colors *utils.Colors,
 	return utils.NewFindItemResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
 }
 
-func (com *DmSoft) FindStrFastE(r *draw.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemResult {
+func (com *DmSoft) FindStrFastE(r *draw.Rect, str []string, colors *color.Colors, sim float32) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrFastE", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim)
 	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrFastEx(r *draw.Rect, str []string, colors *utils.Colors, sim float32) *utils.FindItemsResult {
+func (com *DmSoft) FindStrFastEx(r *draw.Rect, str []string, colors *color.Colors, sim float32) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrFastEx", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim)
 	return utils.NewFindItemsResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrWithFont(r *draw.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
+func (com *DmSoft) FindStrWithFont(r *draw.Rect, str []string, colors *color.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindStrWithFont", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag, &x, &y)
@@ -95,12 +95,12 @@ func (com *DmSoft) FindStrWithFont(r *draw.Rect, str []string, colors *utils.Col
 	return utils.NewFindItemResult(str, fmt.Sprintf("%s|%d|%d", ret.ToString(), ptX, ptY))
 }
 
-func (com *DmSoft) FindStrWithFontE(r *draw.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
+func (com *DmSoft) FindStrWithFontE(r *draw.Rect, str []string, colors *color.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrWithFontE", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag)
 	return utils.NewFindItemResult(str, ret.ToString())
 }
 
-func (com *DmSoft) FindStrWithFontEx(r *draw.Rect, str []string, colors *utils.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemsResult {
+func (com *DmSoft) FindStrWithFontEx(r *draw.Rect, str []string, colors *color.Colors, sim float32, fontName string, fontSize, flag int) *utils.FindItemsResult {
 	ret, _ := com.dm.CallMethod("FindStrWithFontEx", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim, fontName, fontSize, flag)
 	return utils.NewFindItemsResult(str, ret.ToString())
 }
@@ -130,17 +130,17 @@ func (com *DmSoft) GetWordResultCount(str string) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) Ocr(r *draw.Rect, colors *utils.Colors, sim float32) string {
+func (com *DmSoft) Ocr(r *draw.Rect, colors *color.Colors, sim float32) string {
 	ret, _ := com.dm.CallMethod("Ocr", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim)
 	return ret.ToString()
 }
 
-func (com *DmSoft) OcrEx(r *draw.Rect, colors *utils.Colors, sim float32) *utils.OcrResuts {
+func (com *DmSoft) OcrEx(r *draw.Rect, colors *color.Colors, sim float32) *utils.OcrResuts {
 	ret, _ := com.dm.CallMethod("OcrEx", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim)
 	return utils.NewOcrResuts(ret.ToString())
 }
 
-func (com *DmSoft) OcrInFile(r *draw.Rect, picName, colors *utils.Colors, sim float32) string {
+func (com *DmSoft) OcrInFile(r *draw.Rect, picName, colors *color.Colors, sim float32) string {
 	ret, _ := com.dm.CallMethod("OcrInFile", r.Left(), r.Top(), r.Right(), r.Bottom(), picName, colors.String(), sim)
 	return ret.ToString()
 }

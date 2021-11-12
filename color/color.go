@@ -1,4 +1,4 @@
-package utils
+package color
 
 import (
 	"fmt"
@@ -31,10 +31,6 @@ type Colors struct {
 
 func NewColors() *Colors {
 	return &Colors{}
-}
-
-func ParseColors(color string) *Colors {
-	return NewColors()
 }
 
 func (c *Colors) Add(col ...*Color) *Colors {

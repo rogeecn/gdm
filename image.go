@@ -6,6 +6,7 @@ import (
 	"fmt"
 	ole "github.com/go-ole/go-ole"
 	"github.com/rogeecn/draw"
+	"github.com/rogeecn/gdm/color"
 	"github.com/rogeecn/gdm/utils"
 	"strings"
 )
@@ -45,7 +46,7 @@ func (com *DmSoft) CapturePre(file string) int {
 	return int(ret.Val)
 }
 
-func (com *DmSoft) CmpColor(pt *draw.Point, colors *utils.Colors, sim float32) bool {
+func (com *DmSoft) CmpColor(pt *draw.Point, colors *color.Colors, sim float32) bool {
 	ret, _ := com.dm.CallMethod("CmpColor", pt.X, pt.Y, colors.String(), sim)
 	return utils.IsColorOK(ret.Val)
 }
@@ -65,7 +66,7 @@ func (com *DmSoft) EnableGetColorByCapture(enable int) bool {
 	return utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) FindColor(r *draw.Rect, colors *utils.Colors, sim float32, dir int) (*draw.Point, bool) {
+func (com *DmSoft) FindColor(r *draw.Rect, colors *color.Colors, sim float32, dir int) (*draw.Point, bool) {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindColor", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim, dir, &x, &y)
@@ -79,7 +80,7 @@ func (com *DmSoft) FindColor(r *draw.Rect, colors *utils.Colors, sim float32, di
 	return draw.NewPoint(ptX, ptY), utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) FindColorBlock(r *draw.Rect, colors *utils.Colors, sim float32, count, width, height int, intX, intY *int) (*draw.Point, bool) {
+func (com *DmSoft) FindColorBlock(r *draw.Rect, colors *color.Colors, sim float32, count, width, height int, intX, intY *int) (*draw.Point, bool) {
 	x := ole.NewVariant(ole.VT_I4, 0)
 	y := ole.NewVariant(ole.VT_I4, 0)
 	ret, _ := com.dm.CallMethod("FindColorBlock", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim, count, width, height, &x, &y)
@@ -93,22 +94,22 @@ func (com *DmSoft) FindColorBlock(r *draw.Rect, colors *utils.Colors, sim float3
 	return draw.NewPoint(ptX, ptY), utils.IsOK(ret.Val)
 }
 
-func (com *DmSoft) FindColorBlockEx(r *draw.Rect, colors *utils.Colors, sim float32, count int, s *draw.Size) string {
+func (com *DmSoft) FindColorBlockEx(r *draw.Rect, colors *color.Colors, sim float32, count int, s *draw.Size) string {
 	ret, _ := com.dm.CallMethod("FindColorBlockEx", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim, count, s.Width, s.Height)
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindColorE(r *draw.Rect, colors *utils.Colors, sim float32, dir int) string {
+func (com *DmSoft) FindColorE(r *draw.Rect, colors *color.Colors, sim float32, dir int) string {
 	ret, _ := com.dm.CallMethod("FindColorE", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim, dir)
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindColorEx(r *draw.Rect, colors *utils.Colors, sim float32, dir int) string {
+func (com *DmSoft) FindColorEx(r *draw.Rect, colors *color.Colors, sim float32, dir int) string {
 	ret, _ := com.dm.CallMethod("FindColorEx", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim, dir)
 	return ret.ToString()
 }
 
-func (com *DmSoft) FindMulColor(r *draw.Rect, colors *utils.Colors, sim float32) bool {
+func (com *DmSoft) FindMulColor(r *draw.Rect, colors *color.Colors, sim float32) bool {
 	ret, _ := com.dm.CallMethod("FindMulColor", r.Left(), r.Top(), r.Right(), r.Bottom(), colors.String(), sim)
 	return utils.IsOK(ret.Val)
 }
