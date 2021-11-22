@@ -6,6 +6,7 @@ import (
 	"fmt"
 	ole "github.com/go-ole/go-ole"
 	"github.com/rogeecn/draw"
+	"github.com/rogeecn/gdm/color"
 	"github.com/rogeecn/gdm/utils"
 	"strings"
 )
