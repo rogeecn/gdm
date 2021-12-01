@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package gdm
@@ -20,6 +21,10 @@ var (
 type DmSoft struct {
 	dm       *ole.IDispatch
 	IUnknown *ole.IUnknown
+}
+
+func SetDLLPath(path string) {
+	dmReg32 = syscall.NewLazyDLL(path + "DmReg.dll")
 }
 
 // New return *DmSoft.DmSoft
