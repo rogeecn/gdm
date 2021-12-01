@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	dmReg32         = syscall.NewLazyDLL("DmReg.dll")
-	procSetDllPathA = dmReg32.NewProc("SetDllPathA")
-	procSetDllPathW = dmReg32.NewProc("SetDllPathW")
+	dmReg32         *syscall.LazyDLL
+	procSetDllPathA *syscall.LazyProc
+	procSetDllPathW *syscall.LazyProc
 )
 
 // DmSoft ...
@@ -23,12 +23,12 @@ type DmSoft struct {
 	IUnknown *ole.IUnknown
 }
 
-func SetDLLPath(path string) {
-	dmReg32 = syscall.NewLazyDLL(path + "DmReg.dll")
-}
-
 // New return *DmSoft.DmSoft
-func New() (dm *DmSoft, err error) {
+func New(dmRegDllPath string) (dm *DmSoft, err error) {
+	dmReg32 = syscall.NewLazyDLL(dmRegDllPath + "DmReg.dll")
+	procSetDllPathA = dmReg32.NewProc("SetDllPathA")
+	procSetDllPathW = dmReg32.NewProc("SetDllPathW")
+
 	var com DmSoft
 	// 创建对象
 	ole.CoInitialize(0)
