@@ -3,7 +3,6 @@ package utils
 import (
 	"fmt"
 	"github.com/rogeecn/draw"
-	log "github.com/sirupsen/logrus"
 	"strconv"
 	"strings"
 )
@@ -41,7 +40,7 @@ type FindItemResult struct {
 }
 
 func NewFindItemResult(words []string, ret string) *FindItemResult {
-	log.Debugf("NewFindItemResult Parse Result words(%+v), ret: %s", words, ret)
+	// log.Debugf("NewFindItemResult Parse Result words(%+v), ret: %s", words, ret)
 
 	f := &FindItemResult{}
 	if len(ret) == 0 {
@@ -51,7 +50,7 @@ func NewFindItemResult(words []string, ret string) *FindItemResult {
 	rets := strings.Split(ret, "|")
 	f.Index, _ = strconv.Atoi(rets[0])
 	if f.Index == -1 {
-		log.Debugf("NewFindItemResult got index: %d", f.Index)
+		// log.Debugf("NewFindItemResult got index: %d", f.Index)
 
 		return f
 	}
@@ -59,7 +58,7 @@ func NewFindItemResult(words []string, ret string) *FindItemResult {
 		f.Index = -1
 		return f
 	}
-	log.Debugf("NewFindItemResult got index: %d", f.Index)
+	// log.Debugf("NewFindItemResult got index: %d", f.Index)
 
 	f.Item = words[f.Index]
 	f.Point = draw.NewPoint(-1, -1)

@@ -8,7 +8,6 @@ import (
 	"github.com/rogeecn/draw"
 	"github.com/rogeecn/gdm/color"
 	"github.com/rogeecn/gdm/utils"
-	log "github.com/sirupsen/logrus"
 	"strings"
 )
 
@@ -50,7 +49,7 @@ func (com *DmSoft) FindStr(r *draw.Rect, str []string, colors *color.Colors, sim
 
 func (com *DmSoft) FindStrE(r *draw.Rect, str []string, colors *color.Colors, sim float32) *utils.FindItemResult {
 	ret, _ := com.dm.CallMethod("FindStrE", r.Left(), r.Top(), r.Right(), r.Bottom(), strings.Join(str, "|"), colors.String(), sim)
-	log.Debugf("FindStrE result: %s", ret.ToString())
+	// log.Debugf("FindStrE result: %s", ret.ToString())
 	return utils.NewFindItemResult(str, ret.ToString())
 }
 

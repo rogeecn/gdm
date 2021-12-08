@@ -1,7 +1,5 @@
 package gdm
 
-import "log"
-
 // 内存操作暂时不需要
 const (
 	INT32 = 0
@@ -15,7 +13,6 @@ const (
 )
 
 func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int64 {
-	log.Println(hwnd, addr, intType)
 	ret, _ := com.dm.CallMethod("ReadInt", hwnd, addr, intType)
 	return ret.Val
 }
