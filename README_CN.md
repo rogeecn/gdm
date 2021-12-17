@@ -19,3 +19,14 @@ https://github.com/qianniancn/go-dmsoft
 
 ## License
 [Apache 2.0 License](https://github.com/rogeecn/gdm/blob/main/LICENSE)
+
+
+## Contact me
+
+rogeecn@qq.com
+
+## JetBrains
+
+感谢JetBrains为该项目提供IDE支持，点击下图产购买JetBrains IDE许可证以支持世界上最强大的IDE。
+
+[![JetBrains](jetbrains.jpeg)](https://www.jetbrains.com/)
