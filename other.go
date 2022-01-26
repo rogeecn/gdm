@@ -37,6 +37,6 @@ func (com *DmSoft) ReleaseRef() bool {
 }
 
 func (com *DmSoft) SetExitThread() bool {
-	ret, _ := com.dm.CallMethod("SetExitThread")
+	ret, _ := com.dm.CallMethod("SetExitThread", 1)
 	return utils.IsOK(ret.Val)
 }
