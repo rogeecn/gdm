@@ -4,6 +4,7 @@
 package gdm
 
 import (
+	"fmt"
 	"github.com/pkg/errors"
 	"syscall"
 	"unsafe"
@@ -25,13 +26,13 @@ type DmSoft struct {
 }
 
 // New return *DmSoft.DmSoft
-func New(dllPath string) (dm *DmSoft, err error) {
-	dmReg32 = syscall.NewLazyDLL(dllPath + `\DmReg.dll`)
+func New(dllPath, dllReg, dllDm string) (dm *DmSoft, err error) {
+	dmReg32 = syscall.NewLazyDLL(fmt.Sprintf(`%s\%s.dll`, dllPath, dllReg))
 
 	procSetDllPathA = dmReg32.NewProc("SetDllPathA")
 	procSetDllPathW = dmReg32.NewProc("SetDllPathW")
 
-	if !SetDllPathW(dllPath+`\dm.dll`, 1) {
+	if !SetDllPathW(fmt.Sprintf(`%s\%s.dll`, dllPath, dllDm), 1) {
 		return nil, errors.New("load dm.dll failed")
 	}
 
