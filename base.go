@@ -47,8 +47,8 @@ func (com *DmSoft) RegExNoMac(regCode, verInfo, ip string) error {
 	return utils.RegErrorMap[int(ret.Val)]
 }
 
-func (com *DmSoft) RegNoMac(regCode, verInfo, ip string) error {
-	ret, _ := com.dm.CallMethod("RegNoMac", regCode, verInfo, ip)
+func (com *DmSoft) RegNoMac(regCode, verInfo string) error {
+	ret, _ := com.dm.CallMethod("RegNoMac", regCode, verInfo)
 	return utils.RegErrorMap[int(ret.Val)]
 }
 

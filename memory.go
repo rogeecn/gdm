@@ -19,7 +19,7 @@ func (com *DmSoft) ReadInt(hwnd int, addr string, intType int) int64 {
 
 func (com *DmSoft) ReadString(hwnd int, addr string, strType int) string {
 	ret, _ := com.dm.CallMethod("ReadString", hwnd, addr, strType)
-	return string(ret.Val)
+	return ret.ToString()
 }
 
 func (com *DmSoft) ReadDouble(hwnd int, addr string) float64 {

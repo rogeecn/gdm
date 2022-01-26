@@ -171,9 +171,9 @@ func (com *DmSoft) GetWindowTitle(hwnd int) string {
 	return ret.ToString()
 }
 
-func (com *DmSoft) MoveWindow(hwnd, x, y int) int {
+func (com *DmSoft) MoveWindow(hwnd, x, y int) bool {
 	ret, _ := com.dm.CallMethod("MoveWindow", hwnd, x, y)
-	return int(ret.Val)
+	return utils.IsOK(ret.Val)
 }
 
 func (com *DmSoft) ScreenToClient(hwnd int, pt *draw.Point) *draw.Point {
@@ -189,9 +189,9 @@ func (com *DmSoft) ScreenToClient(hwnd int, pt *draw.Point) *draw.Point {
 	return p
 }
 
-func (com *DmSoft) SendPaste(hwnd int) int {
+func (com *DmSoft) SendPaste(hwnd int) bool {
 	ret, _ := com.dm.CallMethod("SendPaste", hwnd)
-	return int(ret.Val)
+	return utils.IsOK(ret.Val)
 }
 
 func (com *DmSoft) SendString(hwnd int, str string) int {
