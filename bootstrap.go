@@ -27,12 +27,12 @@ type DmSoft struct {
 
 // New return *DmSoft.DmSoft
 func New(dllPath, dllReg, dllDm string) (dm *DmSoft, err error) {
-	dmReg32 = syscall.NewLazyDLL(fmt.Sprintf(`%s\%s.dll`, dllPath, dllReg))
+	dmReg32 = syscall.NewLazyDLL(fmt.Sprintf(`%s\%s`, dllPath, dllReg))
 
 	procSetDllPathA = dmReg32.NewProc("SetDllPathA")
 	procSetDllPathW = dmReg32.NewProc("SetDllPathW")
 
-	if !SetDllPathW(fmt.Sprintf(`%s\%s.dll`, dllPath, dllDm), 1) {
+	if !SetDllPathW(fmt.Sprintf(`%s\%s`, dllPath, dllDm), 1) {
 		return nil, errors.New("load dm.dll failed")
 	}
 

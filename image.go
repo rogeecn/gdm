@@ -223,6 +223,6 @@ func (com *DmSoft) SetExcludeRegion(mode int, info string) int {
 }
 
 func (com *DmSoft) SetPicPwd(pwd string) int {
-	ret, _ := com.dm.CallMethod("SetExcludeRegion", pwd)
+	ret, _ := com.dm.CallMethod("SetPicPwd", pwd)
 	return int(ret.Val)
 }
