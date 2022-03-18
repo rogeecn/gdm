@@ -1,4 +1,4 @@
-#go dm plugin wrapper
+# go dm plugin wrapper
 
 [English](https://github.com/rogeecn/gdm/blob/main/README.md) | [中文](https://github.com/rogeecn/gdm/blob/main/README_CN.md)
 
