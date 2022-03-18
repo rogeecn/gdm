@@ -3,7 +3,7 @@
 [English](https://github.com/rogeecn/gdm/blob/main/README.md) | [中文](https://github.com/rogeecn/gdm/blob/main/README_CN.md)
 
 
-`gdm 'is implemented in go package of desert plug-in. Go and some data structures are used to encapsulate the method call of desert plug-in.
+`gdm` is implemented in go package of desert plug-in. Go and some data structures are used to encapsulate the method call of desert plug-in.
 
 Compared with the original function call
 
