@@ -1,0 +1,52 @@
+# version-file which will write or read current semver
+version-file = "internal/version/version"
+
+# hook scripts
+[hooks]
+
+# after version calc,
+# with use the {{ .Version }} to upgrade other files.
+post-version = [
+    "sed -i -e 's/\"version\": \"[^\"]*\"/\"version\": \"{{ .Version }}\"/g' testdata/package.json",
+    "sed -i -e 's/version: [^\\n]*/version: {{ .Version }}/g' testdata/pubspec.yaml"
+]
+
+# git hook pre commit
+pre-commit = [
+    "golangci-lint run",
+    "husky lint-staged",
+]
+
+# git hook commit msg
+commit-msg = [
+    "husky lint-commit",
+]
+
+# list staged files do some pre-process and git add
+[lint-staged]
+"*.go" = [
+    "goimports -l -w",
+    "gofmt -l -w",
+]
+
+# commit msg rule default support conventional commits
+[lint-commit]
+# could check if this exists
+# email = "^(.+@gmail.com|.+@qq.com)$"
+# optional custom types check regex
+# types = "^(feat|fix|build|chore|ci|docs|perf|refactor|revert|style|test)$"
+# optional header check regex
+# header = "^(?P<type>\w+)(\((?P<scope>[\w/.-]+)\))?(?P<breaking>!)?:( +)?(?P<header>.+)"
+# 这些是Git提交时可能使用的不同类型的标记，表示提交的目的和意图:
+# feat:添加新功能或特性
+# fix:修复bug或错误
+# build:修改构建系统或外部依赖项，如包管理器
+# chore:更新工具或库，或进行其他无关紧要的任务
+# ci:修改CI/CD流程或配置
+# docs:更新文档或注释
+# perf:改进性能或优化代码
+# refactor:重构代码，不涉及功能更改
+# revert:撤销先前的提交
+# style:调整代码格式或样式
+# test:添加或修改测试用例
+# 在提交时，使用适当的标记将帮助其他人更好地理解代码更改的目的和含义，以便更好地维护和管理代码库。

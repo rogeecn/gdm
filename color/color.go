@@ -2,14 +2,16 @@ package color
 
 import (
 	"fmt"
-	"github.com/rogeecn/draw"
 	"strings"
+
+	"github.com/rogeecn/draw"
 )
 
 type Color struct {
 	color string
 	delta string
-	gray  string
+	// nolint // placeholder for future use
+	gray string
 }
 
 func NewColor(color string) *Color {
@@ -34,9 +36,7 @@ func NewColors() *Colors {
 }
 
 func (c *Colors) Add(col ...*Color) *Colors {
-	for _, color := range col {
-		c.colors = append(c.colors, color)
-	}
+	c.colors = append(c.colors, col...)
 	return c
 }
 

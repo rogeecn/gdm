@@ -1,9 +1,10 @@
 package gdm
 
 import (
-	"github.com/rogeecn/draw"
 	"os"
 	"testing"
+
+	"github.com/rogeecn/draw"
 )
 
 func TestNew(t *testing.T) {
@@ -13,7 +14,7 @@ func TestNew(t *testing.T) {
 	t.Log("REG_Ver: ", ver)
 
 	pwd, _ := os.Getwd()
-	dm, err := New(pwd)
+	dm, err := New(pwd, "", "")
 	if err != nil {
 		t.Fatal(err)
 	}

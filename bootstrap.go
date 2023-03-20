@@ -1,13 +1,11 @@
-//go:build windows
-// +build windows
-
 package gdm
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"syscall"
 	"unsafe"
+
+	"github.com/pkg/errors"
 
 	ole "github.com/go-ole/go-ole"
 	"github.com/go-ole/go-ole/oleutil"
