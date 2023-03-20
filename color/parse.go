@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func Parse(c string) []*Color {
+func FromString(c string) []*Color {
 	colors := strings.Split(strings.TrimSpace(c), "|")
 
 	colorLst := make([]*Color, len(colors))
